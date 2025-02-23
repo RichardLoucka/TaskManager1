@@ -4,7 +4,20 @@
 <table class="table table-striped w-75">
     <thead>
     <tr>
-        <th>Priority</th>
+        <th class="priority-header">
+            <a asp-action="Index" asp-route-sortOrder="@ViewData["SortOrder"]">
+                Priority
+                @if (ViewData["SortOrder"] == "asc")
+                {
+                    <i class="fa fa-arrow-up"></i>
+                }
+                else
+                {
+                    <i class="fa fa-arrow-down"></i>
+                }
+            </a>
+            
+        </th>
         <th>Title</th>
         <th>Description</th>
         <th>File</th>
@@ -12,11 +25,21 @@
     </tr>
     </thead>
     <tbody>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><input type="checkbox" name="selectedTasks" value=""/></td>
+    @foreach (var task in Model)
+    {
+        <tr>
+            <td>@task.Priority</td>
+            <td>@task.Title</td>
+            <td>@task.Description</td>
+            <td>
+                @if (!string.IsNullOrEmpty(task.FileName))
+                {
+                    <a href="@Url.Action("Download", "Home" , new {fileName = task.FileName})" target="_blank">Download</a>
+                }
+            </td>
+            <td><input type="checkbox" name="selectedTasks" value="@task.Id"/></td>
+        </tr>
+    }
     </tbody>
 </table>
 <div class="button-container d-flex justify-content-between mt-3">
@@ -43,7 +66,17 @@
         text-align: center;
     }
     
+    .priority-header a{
+        color: black;
+        text-decoration: none;
+    }
     
+    .priority-header a:hover{
+        color: darkgray;
+    }
     
+    .priority-header a i{
+        margin-left:  5px;
+    }
     
 </style>
