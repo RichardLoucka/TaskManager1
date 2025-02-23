@@ -245,6 +245,10 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {
+      "Id": "/Users/richardloucka/Desktop/5. Semestr/C#/TaskManager1/TaskManager1/wwwroot/uploads/text.txt",
+      "PackagePath": "staticwebassets/uploads/text.txt"
+    },
+    {
       "Id": "obj/Debug/net7.0/staticwebassets/msbuild.TaskManager1.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

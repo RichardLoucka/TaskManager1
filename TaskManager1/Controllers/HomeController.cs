@@ -70,6 +70,18 @@ public class HomeController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public async Task<IActionResult> Download(string fileName)
+    {
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/", fileName);
+
+        if (System.IO.File.Exists(filePath))
+        {
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            return File(fileBytes, "application/octet-stream", fileName);
+        }
+        return NotFound();
+    }
+
     public IActionResult Privacy()
     {
         return View();
