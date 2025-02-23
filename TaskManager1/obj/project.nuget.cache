@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8O6gakMx0a4=",
+  "dgSpecHash": "2R4t8qncb6o=",
   "success": true,
   "projectFilePath": "/Users/richardloucka/Desktop/5. Semestr/C#/TaskManager1/TaskManager1/TaskManager1.csproj",
   "expectedPackageFiles": [
@@ -41,6 +41,7 @@
     "/Users/richardloucka/.nuget/packages/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg.sha512",
     "/Users/richardloucka/.nuget/packages/microsoft.win32.systemevents/5.0.0/microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "/Users/richardloucka/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/richardloucka/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/richardloucka/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/Users/richardloucka/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",
     "/Users/richardloucka/.nuget/packages/system.configuration.configurationmanager/5.0.0/system.configuration.configurationmanager.5.0.0.nupkg.sha512",

@@ -1,8 +1,12 @@
 ﻿using System.Diagnostics;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Xml;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager1.Models;
 using Microsoft.EntityFrameworkCore;
 using Task = TaskManager1.Models.Task;
+using Newtonsoft.Json;
 
 namespace TaskManager1.Controllers;
 
@@ -80,6 +84,22 @@ public class HomeController : Controller
             return File(fileBytes, "application/octet-stream", fileName);
         }
         return NotFound();
+    }
+
+    public async Task<IActionResult> ExportToJson()
+    {
+        var tasks = await _context.Tasks.ToListAsync();
+        var taskExportList = tasks.Select(t => new TaskToExport
+        {
+            Title = t.Title,
+            Priority = t.Priority,
+            Description = t.Description
+        }).ToList();
+        
+        var json = JsonConvert.SerializeObject(taskExportList, Newtonsoft.Json.Formatting.Indented);
+        var fileName = "tasks.json";
+        var fileBytes = Encoding.UTF8.GetBytes(json);
+        return File(fileBytes, "application/json", fileName);
     }
 
     public IActionResult Privacy()

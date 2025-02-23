@@ -48,9 +48,11 @@
         <button type="submit" class="btn btn-danger">Remove Task</button>
     </div>
 </form>
-<div class="button-container d-flex justify-content-between mt-3">
-    <button type="submit" class="btn btn-primary">Export Tasks</button>
-</div>
+<form asp-action="ExportToJson" method="post">
+    <div class="button-container d-flex justify-content-between mt-3">
+        <button type="submit" class="btn btn-primary">Export Tasks</button>
+    </div>
+</form>
 
 <style>
     .button-container{
