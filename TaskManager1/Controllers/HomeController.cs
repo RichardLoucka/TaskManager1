@@ -53,6 +53,23 @@ public class HomeController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Remove(int[] selectedTasks)
+    {
+        if (selectedTasks != null && selectedTasks.Any())
+        {
+            var tasksToRemove = _context.Tasks.Where(t => selectedTasks.Contains(t.Id)).ToList();
+            
+            if (tasksToRemove.Any())
+            {
+                _context.Tasks.RemoveRange(tasksToRemove);
+                await _context.SaveChangesAsync();
+            }
+        }
+        return RedirectToAction(nameof(Index));
+    }
+
     public IActionResult Privacy()
     {
         return View();

@@ -1,51 +1,53 @@
 ﻿@using Task = System.Threading.Tasks.Task
 <h1>Tasks</h1>
 
-<table class="table table-striped w-75">
-    <thead>
-    <tr>
-        <th class="priority-header">
-            <a asp-action="Index" asp-route-sortOrder="@ViewData["SortOrder"]">
-                Priority
-                @if (ViewData["SortOrder"] == "asc")
-                {
-                    <i class="fa fa-arrow-up"></i>
-                }
-                else
-                {
-                    <i class="fa fa-arrow-down"></i>
-                }
-            </a>
-            
-        </th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>File</th>
-        <th>Select</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var task in Model)
-    {
+<form asp-action="Remove" method="post">
+    <table class="table table-striped w-75">
+        <thead>
         <tr>
-            <td>@task.Priority</td>
-            <td>@task.Title</td>
-            <td>@task.Description</td>
-            <td>
-                @if (!string.IsNullOrEmpty(task.FileName))
-                {
-                    <a href="@Url.Action("Download", "Home" , new {fileName = task.FileName})" target="_blank">Download</a>
-                }
-            </td>
-            <td><input type="checkbox" name="selectedTasks" value="@task.Id"/></td>
+            <th class="priority-header">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SortOrder"]">
+                    Priority
+                    @if (ViewData["SortOrder"] == "asc")
+                    {
+                        <i class="fa fa-arrow-up"></i>
+                    }
+                    else
+                    {
+                        <i class="fa fa-arrow-down"></i>
+                    }
+                </a>
+                
+            </th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>File</th>
+            <th>Select</th>
         </tr>
-    }
-    </tbody>
-</table>
-<div class="button-container d-flex justify-content-between mt-3">
-    <button type="button" class="btn btn-primary" onclick="window.location.href ='@Url.Action("Create", "Home")'">Add Task</button>
-    <button type="submit" class="btn btn-danger">Remove Task</button>
-</div>
+        </thead>
+        <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Priority</td>
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(task.FileName))
+                    {
+                        <a href="@Url.Action("Download", "Home" , new {fileName = task.FileName})" target="_blank">Download</a>
+                    }
+                </td>
+                <td><input type="checkbox" name="selectedTasks" value="@task.Id"/></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div class="button-container d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-primary" onclick="window.location.href ='@Url.Action("Create", "Home")'">Add Task</button>
+        <button type="submit" class="btn btn-danger">Remove Task</button>
+    </div>
+</form>
 <div class="button-container d-flex justify-content-between mt-3">
     <button type="submit" class="btn btn-primary">Export Tasks</button>
 </div>
