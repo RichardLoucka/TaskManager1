@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManager1.Models;
 using Microsoft.EntityFrameworkCore;
+using Task = TaskManager1.Models.Task;
+
 namespace TaskManager1.Controllers;
 
 public class HomeController : Controller
@@ -19,6 +21,36 @@ public class HomeController : Controller
         var tasks = _context.Tasks.AsQueryable();
         tasks = sortOrder == "asc" ? tasks.OrderBy(t => t.Priority) : tasks.OrderByDescending(t => t.Priority);
         return View(await tasks.ToListAsync());
+    }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(Task task, IFormFile file)
+    {
+        if (file != null)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/", file.FileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            task.FileName = file.FileName;
+        }
+
+        if (string.IsNullOrEmpty(task.FileName))
+        {
+            task.FileName = "";
+        }
+
+        _context.Add(task);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
 
     public IActionResult Privacy()
