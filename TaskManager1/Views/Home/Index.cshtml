@@ -1,8 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Task = System.Threading.Tasks.Task
+<h1>Tasks</h1>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<table class="table table-striped w-75">
+    <thead>
+    <tr>
+        <th>Priority</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>File</th>
+        <th>Select</th>
+    </tr>
+    </thead>
+    <tbody>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><input type="checkbox" name="selectedTasks" value=""/></td>
+    </tbody>
+</table>
+<div class="button-container d-flex justify-content-between mt-3">
+    <button type="button" class="btn btn-primary">Add Task</button>
+    <button type="submit" class="btn btn-danger">Remove Task</button>
 </div>
+<div class="button-container d-flex justify-content-between mt-3">
+    <button type="submit" class="btn btn-primary">Export Tasks</button>
+</div>
+
+<style>
+    .button-container{
+        display: flex;
+        justify-content: space-between;
+        width: 75%;
+        margin-top: 20px;
+    }
+    
+    .button-container button{
+        width: 23%;
+    }
+    
+    .table th, .table td{
+        text-align: center;
+    }
+    
+    
+    
+    
+</style>
