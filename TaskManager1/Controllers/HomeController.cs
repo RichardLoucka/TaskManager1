@@ -102,6 +102,35 @@ public class HomeController : Controller
         return File(fileBytes, "application/json", fileName);
     }
 
+    [HttpPost]
+    public async Task<IActionResult> ImportFromJson(IFormFile jsonFile)
+    {
+        if (jsonFile == null || jsonFile.Length == 0)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+        using (var stream = new StreamReader(jsonFile.OpenReadStream()))
+        {
+            var jsonString = await stream.ReadToEndAsync();
+            var importedTasks = JsonConvert.DeserializeObject<List<Task>>(jsonString);
+
+            if (importedTasks != null && importedTasks.Any())
+            {
+                foreach (var task in importedTasks)
+                {
+                    if (string.IsNullOrEmpty(task.FileName))
+                    {
+                        task.FileName = "";
+                    }
+                }
+                _context.Tasks.AddRange(importedTasks);
+                await _context.SaveChangesAsync();
+            }
+        }
+        return RedirectToAction(nameof(Index));
+    }
+
     public IActionResult Privacy()
     {
         return View();

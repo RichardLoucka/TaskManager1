@@ -54,6 +54,15 @@
     </div>
 </form>
 
+<form asp-action="ImportFromJson" method="post" enctype="multipart/form-data">
+    <div class="button-container d-flex justify-content-between mt-3">
+        <input type="file" name="jsonFile" accept=".json" class="form-control w-50">
+        <button type="submit" class="btn btn-primary">Import Tasks</button>
+    </div>
+</form>
+
+
+
 <style>
     .button-container{
         display: flex;
