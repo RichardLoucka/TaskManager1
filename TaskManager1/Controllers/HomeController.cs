@@ -2,14 +2,17 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Xml;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager1.Models;
 using Microsoft.EntityFrameworkCore;
 using Task = TaskManager1.Models.Task;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaskManager1.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     private readonly ApplicationDbContext _context;

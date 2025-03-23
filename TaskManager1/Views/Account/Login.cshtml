@@ -1,0 +1,32 @@
+@model TaskManager1.Models.LoginViewModel
+
+<h2 class="mb-4">Login</h2>
+
+<form asp-action="Login" method="post" class="w-50 mx-auto border p-4 rounded shadow">
+    
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+        <input type="email" asp-for="Email" class="form-control" placeholder="Enter your email" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input type="password" asp-for="Password" class="form-control" placeholder="Enter your password" required>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input type="checkbox" asp-for="RememberMe" class="form-check-input">
+        <label for="RememberMe" class="form-check-label">Remember Me</label>
+    </div>
+    
+    <div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </div>
+</form>
+
+<style>
+    form {
+        max-width: 400px;
+        background: #f8f9fa;
+    }
+</style>
