@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TaskManager1.Models
 {
@@ -16,5 +17,10 @@ namespace TaskManager1.Models
         public string Description { get; set; }
         public int Priority { get; set; }
         public string FileName { get; set; }
+        
+        public int? CategoryId { get; set; }
+        
+        [ForeignKey("CategoryId")]
+        public Category? Category { get; set; }
     }
 }

@@ -19,16 +19,28 @@ public class HomeController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index(string sortOrder)
+    public async Task<IActionResult> Index(string sortOrder, int? categoryId, string searchString)
     {
         ViewData["SortOrder"] = sortOrder == "asc" ? "desc" : "asc";
-        var tasks = _context.Tasks.AsQueryable();
+        var tasks = _context.Tasks.Include(t => t.Category).AsQueryable();
+
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            tasks = tasks.Where(t => t.Title.Contains(searchString));
+        }
+
+        if (categoryId.HasValue)
+        {
+            tasks = tasks.Where(t => t.CategoryId == categoryId.Value);
+        }
         tasks = sortOrder == "asc" ? tasks.OrderBy(t => t.Priority) : tasks.OrderByDescending(t => t.Priority);
+        ViewData["Categories"] = await _context.Categories.ToListAsync();
         return View(await tasks.ToListAsync());
     }
 
     public IActionResult Create()
     {
+        ViewData["Categories"] = _context.Categories.ToList();
         return View();
     }
 

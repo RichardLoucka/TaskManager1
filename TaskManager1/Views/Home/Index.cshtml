@@ -1,6 +1,20 @@
 ﻿@using Task = System.Threading.Tasks.Task
 <h1>Tasks</h1>
 
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="d-flex gap-2">
+        <input type="text" name="searchString" class="form-control w-50" placeholder="Search task..." value="@Context.Request.Query["searchString"]">
+        <select name="categoryId" class="form-select w-25">
+            <option value="">All Categories</option>
+            @foreach (var category in ViewData["Categories"] as List<TaskManager1.Models.Category>)
+            {
+                <option value="@category.Id" selected="@(Context.Request.Query["categoryId"] == category.Id.ToString())">@category.Name</option>
+            }
+        </select>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
+
 <form asp-action="Remove" method="post">
     <table class="table table-striped w-75">
         <thead>
@@ -22,6 +36,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>File</th>
+            <th>Category</th>
             <th>Select</th>
         </tr>
         </thead>
@@ -38,6 +53,7 @@
                         <a href="@Url.Action("Download", "Home" , new {fileName = task.FileName})" target="_blank">Download</a>
                     }
                 </td>
+                <td>@(task.Category != null ? task.Category.Name : "No Category")</td>
                 <td><input type="checkbox" name="selectedTasks" value="@task.Id"/></td>
             </tr>
         }

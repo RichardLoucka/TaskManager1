@@ -23,6 +23,17 @@
     </div>
     
     <div class="form-group">
+        <label for="CategoryId">Category</label>
+        <select class="form-control" id="CategoryId" name="CategoryId">
+            <option value="">Select a Category</option>
+            @foreach (var category in ViewData["Categories"] as List<TaskManager1.Models.Category>)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </div>
+    
+    <div class="form-group">
         <label for="File">Attach File</label>
         <input type="file" class="form-control" id="File" name="File"/>
     </div>
